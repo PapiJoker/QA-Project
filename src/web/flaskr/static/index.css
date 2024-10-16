@@ -1,0 +1,51 @@
+* {
+    font-family: Verdana;
+}
+
+#main_window {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    margin-left: 30vw;
+    margin-right: 30vw;
+}
+
+#result_box {
+    text-align: center;
+    background-color: #FFECD7;
+    height: fit-content;
+    width: 100%;
+}
+
+#clear_button {
+    width: 100%;
+    height: 100%;
+}
+
+textarea {
+    resize: none
+}
+
+#result_box_text {
+
+}
+
+button {
+    background-color: #EBEBEB;
+    color: #000000;
+    min-height: 5vh;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    box-shadow: 1px 1px;
+}
+
+button:active {
+    background-color: #DADADA;
+}

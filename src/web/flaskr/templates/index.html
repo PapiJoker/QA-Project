@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Calculator</title>
+        <link rel="stylesheet" href="./static/index.css">
+    </head>
+    <body>
+        <div id="main_window">
+            <table id="table">
+                <tr style="display: table-row">
+                    <td>
+                        <h1 id="title">Calculator</h1>
+                    </td>
+                    <td>
+                        <button id="clear_button"  onclick="location.assign('/')">Clear</button>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="result_box">
+                <p id="result_box_text">
+                    Text<br>Line Two
+                </p>
+            </div>
+            <label for="textbox" style="margin-top: 2vh; margin-bottom: 2vh;">Values</label>
+            <textarea id="textbox" rows="5"></textarea>
+
+            <h2>Descriptive Statistics</h2>
+
+            <button id="sample_standard_deviation" onclick="location.assign('/sample_standard_deviation')">Compute Sample Standard Deviation | one value per line</button>
+            <button id="population_standard_deviation" onclick="location.assign('/population_standard_deviation')">Compute Population Standard Deviation | one value per line</button>
+            <button id="mean" onclick="location.assign('/mean')">Compute Mean | one value per line</button>
+            <button id="z_score" onclick="location.assign('/z_score')">Compute Z Score | value, mean, stdDev on one line</button>
+
+            <h2>Single Linear Regression</h2>
+
+            <button id="single_linear_regression" onclick="location.assign('/single_linear_regression')">Compute Single Linear Regression Formula | one x, y pair per line</button>
+            <button id="y_from_linear_regression" onclick="location.assign('/y_from_linear_regression')">Compute Y from Linear Regression Formula | x, m, b on one line</button>
+        </div>
+    </body>
+</html>
