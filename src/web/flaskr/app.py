@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from src.calculator_logic import CalculatorLogic
+from src.calculator_logic import calculator_logic
 
 app = Flask(__name__)
 calculator_logic = CalculatorLogic()
