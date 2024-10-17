@@ -1,5 +1,6 @@
 import math
-from calculation_result import CalculationResult
+from .calculation_result import CalculationResult
+
 class CalculatorLogic:
     def compute_sample_stdev(self, input_list):
         #preq-LOGIC-3
