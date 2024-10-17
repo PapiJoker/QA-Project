@@ -1,44 +1,40 @@
-from flask import Flask, render_template
-from src.calculator_logic import CalculatorLogic
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
-calculator_logic = CalculatorLogic()
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main():
-    return render_template('index.html')
+    return render_template('index.html', result="Result")
 
 
-@app.route('/sample_standard_deviation')
+@app.route('/sample_standard_deviation', methods=['GET', 'POST'])
 def sample_standard_deviation():
-    return render_template('index.html')
+    user_message = request.form.get('user_message')
+    return f"<h1>{user_message}</h1>"
 
 
-@app.route('/population_standard_deviation')
+@app.route('/population_standard_deviation', methods=['GET', 'POST'])
 def population_standard_deviation():
-    return render_template('index.html')
+    user_message = request.form.get('user_message')
+    return f"<h1>{user_message}</h1>"
 
-
-@app.route('/mean')
+@app.route('/mean', methods=['GET', 'POST'])
 def mean():
-    return render_template('index.html')
+    user_message = request.form.get('user_message')
+    return f"<h1>{user_message}</h1>"
 
-
-@app.route('/z_score')
+@app.route('/z_score', methods=['GET', 'POST'])
 def z_score():
-    return render_template('index.html')
+    user_message = request.form.get('user_message')
+    return f"<h1>{user_message}</h1>"
 
-
-@app.route('/single_linear_regression')
+@app.route('/single_linear_regression', methods=['GET', 'POST'])
 def single_linear_regression():
-    return render_template('index.html')
+    user_message = request.form.get('user_message')
+    return f"<h1>{user_message}</h1>"
 
-
-@app.route('/y_from_linear_regression')
+@app.route('/y_from_linear_regression', methods=['GET', 'POST'])
 def y_from_linear_regression():
-    return render_template('index.html')
-
-
-if __name__ == '__main__':
-    app.run(debug = True)
+    user_message = request.form.get('user_message')
+    return f"<h1>{user_message}</h1>"
