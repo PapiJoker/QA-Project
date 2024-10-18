@@ -1,5 +1,5 @@
 * {
-    font-family: Verdana;
+    font-family: Arial;
 }
 
 #main_window {
@@ -14,9 +14,20 @@
 
 #result_box {
     text-align: center;
-    background-color: #FFECD7;
     height: fit-content;
     width: 100%;
+}
+
+/* Style for success */
+.success-box {
+    background-color: #FFECD7;
+    color: #000000
+}
+
+/* Style for error */
+.error-box {
+    background-color: #B70F0A;
+    color: #FFFFFF;
 }
 
 #clear_button {
@@ -28,18 +39,21 @@ textarea {
     resize: none
 }
 
-#result_box_text {
-
+form {
+    width: 100%;
+    min-height: 5vh;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
+/* Button styling */
 button {
     background-color: #EBEBEB;
     color: #000000;
-    min-height: 5vh;
+    height: 5vh;
+    width: 100%;
     border-width: 1px;
     border-radius: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 button:hover {
