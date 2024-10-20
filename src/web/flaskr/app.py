@@ -1,69 +1,79 @@
-from random import sample
-
 from flask import Flask, render_template, request, redirect, url_for
-from src.calculator_logic import CalculatorLogic
+import src.calculator_logic as logic
 
 app = Flask(__name__)
-calculator = CalculatorLogic()
 
 
 @app.route('/', methods=['GET'])
 def main():
-    return render_template('index.html', operation='Enter values below, then select an operation')
+    return render_template('index.html', operation='Enter values below, then select an operation', textbox_content='')
 
 
 @app.route('/sample_standard_deviation', methods=['GET', 'POST'])
 def sample_standard_deviation():
-    textbox_content = request.form.get('user_message')
-    calculation = calculator.compute_sample_stdev(textbox_content)
+    textbox_content = request.form.get('textbox_content')
+    calculation = logic.compute_sample_standard_deviation(textbox_content)
     if calculation.is_successful:
-        return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation)
+        return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
+                               textbox_content=textbox_content)
     else:
         return redirect(url_for('error', error_message=calculation.error))
 
-'''
 
 @app.route('/population_standard_deviation', methods=['GET', 'POST'])
 def population_standard_deviation():
-    textbox_content = request.form.get('user_message')
-    if textbox_content:
-        return f"<h1>{textbox_content}</h1>"
+    textbox_content = request.form.get('textbox_content')
+    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    if calculation.is_successful:
+        return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
+                               textbox_content=textbox_content)
     else:
-        return throw_error()
+        return redirect(url_for('error', error_message=calculation.error))
+
 
 @app.route('/mean', methods=['GET', 'POST'])
 def mean():
-    textbox_content = request.form.get('user_message')
-    if textbox_content:
-        return f"<h1>{textbox_content}</h1>"
+    textbox_content = request.form.get('textbox_content')
+    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    if calculation.is_successful:
+        return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
+                               textbox_content=textbox_content)
     else:
-        return throw_error()
+        return redirect(url_for('error', error_message=calculation.error))
+
 
 @app.route('/z_score', methods=['GET', 'POST'])
 def z_score():
-    textbox_content = request.form.get('user_message')
-    if textbox_content:
-        return f"<h1>{textbox_content}</h1>"
+    textbox_content = request.form.get('textbox_content')
+    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    if calculation.is_successful:
+        return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
+                               textbox_content=textbox_content)
     else:
-        return throw_error()
+        return redirect(url_for('error', error_message=calculation.error))
+
 
 @app.route('/single_linear_regression', methods=['GET', 'POST'])
 def single_linear_regression():
-    textbox_content = request.form.get('user_message')
-    if textbox_content:
-        return f"<h1>{textbox_content}</h1>"
+    textbox_content = request.form.get('textbox_content')
+    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    if calculation.is_successful:
+        return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
+                               textbox_content=textbox_content)
     else:
-        return throw_error()
+        return redirect(url_for('error', error_message=calculation.error))
+
 
 @app.route('/y_from_linear_regression', methods=['GET', 'POST'])
 def y_from_linear_regression():
-    textbox_content = request.form.get('user_message')
-    if textbox_content:
-        return f"<h1>{textbox_content}</h1>"
+    textbox_content = request.form.get('textbox_content')
+    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    if calculation.is_successful:
+        return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
+                               textbox_content=textbox_content)
     else:
-        return throw_error()
+        return redirect(url_for('error', error_message=calculation.error))
 
-'''
 
 @app.route('/error', methods=['GET', 'POST'])
 def error():

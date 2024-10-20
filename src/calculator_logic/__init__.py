@@ -1,1 +1,1 @@
-from .calculator_logic import CalculatorLogic
+from calculator_logic import *

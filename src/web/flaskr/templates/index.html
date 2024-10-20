@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Calculator</title>
-    <link rel="stylesheet" href="./static/index.css">
+    <link rel="stylesheet" href="../static/index.css">
 </head>
 <body>
 <script>
@@ -33,31 +33,31 @@
     </div>
 
     <label for="textbox" style="margin-top: 2vh; margin-bottom: 2vh;">Values</label>
-    <textarea id="textbox" rows="5"></textarea>
+    <textarea id="textbox" rows="5">{{ textbox_content }}</textarea>
 
     <h2>Descriptive Statistics</h2>
 
     <form action="/sample_standard_deviation" method="POST">
-        <input type="hidden" name="user_message" id="sample_standard_deviation">
+        <input type="hidden" name="textbox_content" id="sample_standard_deviation">
         <button type="submit" onclick="setTextareaValue('sample_standard_deviation')">Compute Sample Standard Deviation
             | one value per line
         </button>
     </form>
 
     <form action="/population_standard_deviation" method="POST">
-        <input type="hidden" name="user_message" id="population_standard_deviation">
+        <input type="hidden" name="textbox_content" id="population_standard_deviation">
         <button id="population_standard_deviation" onclick="setTextareaValue('population_standard_deviation')">Compute
             Population Standard Deviation | one value per line
         </button>
     </form>
 
     <form action="/mean" method="POST">
-        <input type="hidden" name="user_message" id="mean">
+        <input type="hidden" name="textbox_content" id="mean">
         <button id="mean" onclick="setTextareaValue('mean')">Compute Mean | one value per line</button>
     </form>
 
     <form action="/z_score" method="POST">
-        <input type="hidden" name="user_message" id="z_score">
+        <input type="hidden" name="textbox_content" id="z_score">
         <button id="z_score" onclick="setTextareaValue('z_score')">Compute Z Score | value, mean, stdDev on one line
         </button>
     </form>
@@ -66,14 +66,14 @@
     <h2>Single Linear Regression</h2>
 
     <form action="/single_linear_regression" method="POST">
-        <input type="hidden" name="user_message" id="single_linear_regression">
+        <input type="hidden" name="textbox_content" id="single_linear_regression">
         <button id="single_linear_regression" onclick="setTextareaValue('single_linear_regression')">Compute Single
             Linear Regression Formula | one x, y pair per line
         </button>
     </form>
 
     <form action="/y_from_linear_regression" method="POST">
-        <input type="hidden" name="user_message" id="y_from_linear_regression">
+        <input type="hidden" name="textbox_content" id="y_from_linear_regression">
         <button id="y_from_linear_regression" onclick="setTextareaValue('y_from_linear_regression')">Compute Y from
             Linear Regression Formula | x, m, b on one line
         </button>
