@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import src.calculator_logic as logic
+from src.calculator_logic import calculator_logic as logic
 
 app = Flask(__name__)
 
