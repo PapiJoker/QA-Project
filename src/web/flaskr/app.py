@@ -23,7 +23,7 @@ def sample_standard_deviation():
 @app.route('/population_standard_deviation', methods=['GET', 'POST'])
 def population_standard_deviation():
     textbox_content = request.form.get('textbox_content')
-    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    calculation = logic.compute_population_standard_deviation(textbox_content)
     if calculation.is_successful:
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
@@ -34,7 +34,7 @@ def population_standard_deviation():
 @app.route('/mean', methods=['GET', 'POST'])
 def mean():
     textbox_content = request.form.get('textbox_content')
-    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    calculation = logic.compute_mean(textbox_content)
     if calculation.is_successful:
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
@@ -45,7 +45,7 @@ def mean():
 @app.route('/z_score', methods=['GET', 'POST'])
 def z_score():
     textbox_content = request.form.get('textbox_content')
-    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    calculation = logic.compute_z_score(textbox_content)
     if calculation.is_successful:
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
@@ -56,7 +56,7 @@ def z_score():
 @app.route('/single_linear_regression', methods=['GET', 'POST'])
 def single_linear_regression():
     textbox_content = request.form.get('textbox_content')
-    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    calculation = logic.compute_single_linear_regression(textbox_content)
     if calculation.is_successful:
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
@@ -67,7 +67,7 @@ def single_linear_regression():
 @app.route('/y_from_linear_regression', methods=['GET', 'POST'])
 def y_from_linear_regression():
     textbox_content = request.form.get('textbox_content')
-    calculation = logic.compute_sample_standard_deviation(textbox_content)
+    calculation = logic.compute_y_linear_regression(textbox_content)
     if calculation.is_successful:
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
