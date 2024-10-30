@@ -7,8 +7,13 @@ def compute_sample_standard_deviation(textbox_content):
     # preq-LOGIC-3
     try:
         input_list = textbox_content.replace('\r', '').split('\n')
-        if '' in input_list:
+        #check size, split on commas and spaces, remove blank and compare size. if change error out, if no change continue
+        while '' in input_list:
             input_list.remove('')
+
+        for row in input_list:
+            if ',' in row:
+                raise ValueError('Entries must be separated by new lines')
 
         if len(input_list) == 0:
             raise ValueError("List Is Empty")
@@ -26,7 +31,6 @@ def compute_sample_standard_deviation(textbox_content):
             sum_diff_squares += diff_squares
 
         stddev = math.sqrt(sum_diff_squares / (len(input_list) - 1))
-        print(stddev)
 
         return CalculationResult(stddev, True, "Sample Standard Deviation", "")
 
@@ -38,13 +42,17 @@ def compute_population_standard_deviation(textbox_content):
     # preq-LOGIC-4
     try:
         input_list = textbox_content.replace('\r', '').split('\n')
-        if '' in input_list:
+        while '' in input_list:
             input_list.remove('')
+
+        for row in input_list:
+            if ',' in row:
+                raise ValueError('Entries must be separated by new lines')
 
         if len(input_list) == 0:
             raise ValueError("List Is Empty")
         elif len(input_list) == 1:
-            raise ValueError("Not Enough Arguments")
+            raise ValueError("At least two values required")
 
         for i in range(len(input_list)):
             input_list[i] = float(input_list[i])
@@ -64,8 +72,12 @@ def compute_mean(textbox_content):
     # preq-LOGIC-5
     try:
         input_list = textbox_content.replace('\r', '').split('\n')
-        if '' in input_list:
+        while '' in input_list:
             input_list.remove('')
+
+        for row in input_list:
+            if ',' in row:
+                raise ValueError('Entries must be separated by new lines')
 
         if len(input_list) == 0:
             raise ValueError("List Is Empty")
@@ -83,7 +95,7 @@ def compute_z_score(textbox_content):
     # preq-LOGIC-6
     try:
         input_list = textbox_content.replace(' ', '').split(',')
-        if '' in input_list:
+        while '' in input_list:
             input_list.remove('')
 
         if len(input_list) != 3:
@@ -107,7 +119,8 @@ def compute_single_linear_regression(textbox_content):
     # y_bar = Sum(y)/n
     try:
         input_pairs = textbox_content.replace('\r', '').split('\n')
-        if '' in input_pairs:
+
+        while '' in input_pairs:
             input_pairs.remove('')
 
         if len(input_pairs) == 0:
@@ -118,15 +131,17 @@ def compute_single_linear_regression(textbox_content):
 
         for pairs in input_pairs:
             pair = pairs.split(',')
+            if len(pair) != 2:
+                raise ValueError("Two values per line, separated by comma")
             x_positions.append(float(pair[0]))
             y_positions.append(float(pair[1]))
-        print(x_positions)
-        print(y_positions)
+
+        if len(input_pairs) == 1:
+            result = f'y = 0x + {y_positions[0]}'
+            return CalculationResult(result, True, "Single Linear Regression", "")
 
         x_bar = sum(x_positions) / len(x_positions)
-        print(x_bar)
         y_bar = sum(y_positions) / len(y_positions)
-        print(y_bar)
 
         top_sum = 0
         bottom_sum = 0
@@ -147,7 +162,7 @@ def compute_y_linear_regression(textbox_content):
     # preq-LOGIC-8
     try:
         input_list = textbox_content.replace(' ', '').split(',')
-        if '' in input_list:
+        while '' in input_list:
             input_list.remove('')
 
         if len(input_list) != 3:

@@ -17,7 +17,7 @@ def sample_standard_deviation():
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
     else:
-        return redirect(url_for('error', error_message=calculation.error))
+        return redirect(url_for('error', error_message=calculation.error, textbox_content=textbox_content))
 
 
 @app.route('/population_standard_deviation', methods=['GET', 'POST'])
@@ -28,7 +28,7 @@ def population_standard_deviation():
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
     else:
-        return redirect(url_for('error', error_message=calculation.error))
+        return redirect(url_for('error', error_message=calculation.error, textbox_content=textbox_content))
 
 
 @app.route('/mean', methods=['GET', 'POST'])
@@ -39,7 +39,7 @@ def mean():
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
     else:
-        return redirect(url_for('error', error_message=calculation.error))
+        return redirect(url_for('error', error_message=calculation.error, textbox_content=textbox_content))
 
 
 @app.route('/z_score', methods=['GET', 'POST'])
@@ -50,7 +50,7 @@ def z_score():
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
     else:
-        return redirect(url_for('error', error_message=calculation.error))
+        return redirect(url_for('error', error_message=calculation.error, textbox_content=textbox_content))
 
 
 @app.route('/single_linear_regression', methods=['GET', 'POST'])
@@ -61,7 +61,7 @@ def single_linear_regression():
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
     else:
-        return redirect(url_for('error', error_message=calculation.error))
+        return redirect(url_for('error', error_message=calculation.error, textbox_content=textbox_content))
 
 
 @app.route('/y_from_linear_regression', methods=['GET', 'POST'])
@@ -72,10 +72,11 @@ def y_from_linear_regression():
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)
     else:
-        return redirect(url_for('error', error_message=calculation.error))
+        return redirect(url_for('error', error_message=calculation.error, textbox_content=textbox_content))
 
 
 @app.route('/error', methods=['GET', 'POST'])
 def error():
+    textbox_content = request.args.get('textbox_content')
     error_message = request.args.get('error_message', 'An unknown error occurred...')
-    return render_template('index.html', error_message=error_message)
+    return render_template('index.html', error_message=error_message, textbox_content=textbox_content)
