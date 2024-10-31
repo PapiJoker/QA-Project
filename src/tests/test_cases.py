@@ -120,8 +120,8 @@ def test_PopulationStandardDeviation_OneValue_ReturnsZero():
 def test_PopulationStandardDeviation_CommaInList_ReturnsZero():
     #preq-UNIT-TEST-3
     #Arrange
-    input_data = "10"
-    expected = 0.0
+    input_data = "10,10"
+    expected = "Commas Used, Population Standard Deviation format one value per line"
 
     #Act
     result = compute_population_standard_deviation(input_data)
