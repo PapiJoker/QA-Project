@@ -1,5 +1,4 @@
 import math
-import re
 from .calculation_result import CalculationResult
 
 
@@ -15,6 +14,8 @@ def compute_sample_standard_deviation(textbox_content):
             if not re.search(r'[0-9,.]+', input_list[i]):
                 raise ValueError('Characters Unallowed, Sample Standard Deviation format one value per line')
 
+        # if the list contains a non-numeric value, raise ValueError("Sample Standard Deviation format one value per line")
+
         # Remove empty lines
         while '' in input_list:
             input_list.remove('')
@@ -27,6 +28,7 @@ def compute_sample_standard_deviation(textbox_content):
         # Error if the input is empty
         if len(input_list) == 0:
             raise ValueError('Empty List, Sample Standard Deviation format one value per line')
+
         # Error if only 1 value is given
         elif len(input_list) == 1:
             raise ValueError('Division by Zero, Sample Standard Deviation format one value per line')
@@ -123,7 +125,7 @@ def compute_mean(textbox_content):
         # Error out if values are separated by commas
         for row in input_list:
             if ',' in row:
-                raise ValueError('Entries must be separated by new lines')
+                raise ValueError('Non-Value found, Mean format one value per line')
 
         # Error if the input is empty
         if len(input_list) == 0:
@@ -142,7 +144,7 @@ def compute_mean(textbox_content):
 
     # Catch errors and show the error page
     except ValueError as e:
-        return CalculationResult(0.0, False, "", "Mean format one value per line")
+        return CalculationResult(0.0, False, "", e)
 
 
 def compute_z_score(textbox_content):
@@ -162,8 +164,8 @@ def compute_z_score(textbox_content):
             input_list.remove('')
 
         # Error if the input is empty
-        if len(input_list) != 1:
-            raise ValueError("List Is Empty, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
+        if len(input_list) == 0:
+            raise ValueError("Empty List, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
 
         input_list = input_list[0].split(',')
         while '' in input_list:
@@ -181,7 +183,7 @@ def compute_z_score(textbox_content):
             input_list[i] = float(input_list[i])
 
         if input_list[2] == 0:
-            raise ValueError("Division by Zero")
+            raise ValueError("Division by Zero, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
 
         z = (input_list[0] - input_list[1]) / input_list[2]
         return CalculationResult(z, True, "Z-Score", "")
@@ -214,7 +216,7 @@ def compute_single_linear_regression(textbox_content):
 
         # Error if the input is empty
         if len(input_pairs) == 0:
-            raise ValueError("List Is Empty, Single Linear Regression format is one x,y pair per line")
+            raise ValueError("Empty List, Single Linear Regression format is one x,y pair per line separated by commas")
 
         x_positions = []
         y_positions = []
@@ -229,14 +231,22 @@ def compute_single_linear_regression(textbox_content):
                     temp.remove('')
                 if len(temp) > 1:
                     raise ValueError('Single Linear Regression format is two values per line, separated by comma')
+            while '' in pair:
+                pair.remove('')
             if len(pair) != 2:
-                raise ValueError("Single Linear Regression format is two values per line, separated by comma")
+                raise ValueError("Missing x or y value, Single Linear Regression format is one x,y pair per line separated by commas")
             x_positions.append(float(pair[0]))
             y_positions.append(float(pair[1]))
 
         if len(input_pairs) == 1:
-            result = f'y = 0x + {y_positions[0]}'
-            return CalculationResult(result, True, "Single Linear Regression", "")
+            raise ValueError("More than 1 x,y pair needed, Single Linear Regression format is one x,y pair per line separated by commas")
+
+        if all(i == x_positions[0] for i in x_positions):
+            raise ValueError("All Xs are same value, Single Linear Regression format is one x,y pair per line separated by commas")
+
+        if all(i == y_positions[0] for i in y_positions):
+            raise ValueError("All Ys are same value, Single Linear Regression format is one x,y pair per line separated by commas")
+
 
         x_bar = sum(x_positions) / len(x_positions)
         y_bar = sum(y_positions) / len(y_positions)
@@ -264,27 +274,17 @@ def compute_y_linear_regression(textbox_content):
         # Split lines and remove unnecessary escape characters
         input_list = textbox_content.replace(' ', '').split(',')
 
-        # Check for non-numeric characters
-        for i in range(len(input_list)):
-            input_list[i] = input_list[i].strip()
-            if not re.search(r'[0-9,.]+', input_list[i]):
-                raise ValueError('Characters Unallowed, Sample Standard Deviation format one value per line')
-
         # Remove empty lines
         while '' in input_list:
             input_list.remove('')
 
-        # Convert strings to doubles
-        for i in range(len(input_list)):
-            # Catch multiple values separated by spaces
-            temp = input_list[i].split(' ')
-            if len(temp) > 1:
-                raise ValueError('Y-Regression format is \"x, m, b\" on one line separated by commas')
-            input_list[i] = float(input_list[i])
-
         # Error if the input is not 3 values
         if len(input_list) != 3:
             raise ValueError("Y-Regression format is \"x, m, b\" on one line separated by commas")
+
+        # Convert strings to doubles
+        for i in range(len(input_list)):
+            input_list[i] = float(input_list[i])
 
         y = (input_list[0] * input_list[1]) + input_list[2]
 
