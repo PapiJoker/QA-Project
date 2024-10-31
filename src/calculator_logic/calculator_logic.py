@@ -1,4 +1,5 @@
 import math
+import re
 from .calculation_result import CalculationResult
 
 
@@ -7,6 +8,12 @@ def compute_sample_standard_deviation(textbox_content):
     try:
         # Split lines and remove unnecessary escape characters
         input_list = textbox_content.replace('\r', '').split('\n')
+
+        # Check for non-numeric characters
+        for i in range(len(input_list)):
+            input_list[i] = input_list[i].strip()
+            if not re.search(r'[0-9,.]+', input_list[i]):
+                raise ValueError('Characters Unallowed, Sample Standard Deviation format one value per line')
 
         # Remove empty lines
         while '' in input_list:
@@ -26,6 +33,10 @@ def compute_sample_standard_deviation(textbox_content):
 
         # Convert strings to doubles
         for i in range(len(input_list)):
+            # Catch multiple values separated by spaces
+            temp = input_list[i].split(' ')
+            if len(temp) > 1:
+                raise ValueError('Sample Standard Deviation format one value per line')
             input_list[i] = float(input_list[i])
 
         # Perform the calculation
@@ -51,6 +62,12 @@ def compute_population_standard_deviation(textbox_content):
         # Split lines and remove unnecessary escape characters
         input_list = textbox_content.replace('\r', '').split('\n')
 
+        # Check for non-numeric characters
+        for i in range(len(input_list)):
+            input_list[i] = input_list[i].strip()
+            if not re.search(r'[0-9,.]+', input_list[i]):
+                raise ValueError('Characters Unallowed, Sample Standard Deviation format one value per line')
+
         # Remove empty lines
         while '' in input_list:
             input_list.remove('')
@@ -68,6 +85,10 @@ def compute_population_standard_deviation(textbox_content):
 
         # Convert strings to doubles
         for i in range(len(input_list)):
+            # Catch multiple values separated by spaces
+            temp = input_list[i].split(' ')
+            if len(temp) > 1:
+                raise ValueError('Population Standard Deviation format one value per line')
             input_list[i] = float(input_list[i])
 
         sum_diff_squares = 0.0
@@ -89,6 +110,12 @@ def compute_mean(textbox_content):
         # Split lines and remove unnecessary escape characters
         input_list = textbox_content.replace('\r', '').split('\n')
 
+        # Check for non-numeric characters
+        for i in range(len(input_list)):
+            input_list[i] = input_list[i].strip()
+            if not re.search(r'[0-9,.]+', input_list[i]):
+                raise ValueError('Characters Unallowed, Sample Standard Deviation format one value per line')
+
         # Remove empty lines
         while '' in input_list:
             input_list.remove('')
@@ -100,10 +127,14 @@ def compute_mean(textbox_content):
 
         # Error if the input is empty
         if len(input_list) == 0:
-            raise ValueError("List Is Empty")
+            raise ValueError("Empty List, Mean format one value per line")
 
         # Convert strings to doubles
         for i in range(len(input_list)):
+            # Catch multiple values separated by spaces
+            temp = input_list[i].split(' ')
+            if len(temp) > 1:
+                raise ValueError('Mean format one value per line')
             input_list[i] = float(input_list[i])
 
         mean = sum(input_list) / len(input_list)
@@ -119,6 +150,12 @@ def compute_z_score(textbox_content):
     try:
         # Split lines and remove unnecessary escape characters
         input_list = textbox_content.replace(' ', '').split('\n')
+
+        # Check for non-numeric characters
+        for i in range(len(input_list)):
+            input_list[i] = input_list[i].strip()
+            if not re.search(r'[0-9,.]+', input_list[i]):
+                raise ValueError('Characters Unallowed, Sample Standard Deviation format one value per line')
 
         # Remove empty lines
         while '' in input_list:
@@ -137,6 +174,10 @@ def compute_z_score(textbox_content):
 
         # Convert strings to doubles
         for i in range(len(input_list)):
+            # Catch multiple values separated by spaces
+            temp = input_list[i].split(' ')
+            if len(temp) > 1:
+                raise ValueError('Z-Score format is \"value,mean,stdDev\" on one line separated by commas')
             input_list[i] = float(input_list[i])
 
         if input_list[2] == 0:
@@ -161,13 +202,19 @@ def compute_single_linear_regression(textbox_content):
         # Split lines and remove unnecessary escape characters
         input_pairs = textbox_content.replace('\r', '').split('\n')
 
+        # Check for non-numeric characters
+        for i in range(len(input_pairs)):
+            input_pairs[i] = input_pairs[i].strip()
+            if not re.search(r'[0-9,.]+', input_pairs[i]):
+                raise ValueError('Characters Unallowed, Sample Standard Deviation format one value per line')
+
         # Remove empty lines
         while '' in input_pairs:
             input_pairs.remove('')
 
         # Error if the input is empty
         if len(input_pairs) == 0:
-            raise ValueError("List Is Empty")
+            raise ValueError("List Is Empty, Single Linear Regression format is one x,y pair per line")
 
         x_positions = []
         y_positions = []
@@ -175,8 +222,15 @@ def compute_single_linear_regression(textbox_content):
         # Convert strings to doubles and separate pairs
         for pairs in input_pairs:
             pair = pairs.split(',')
+            for p in range(len(pair)):
+                # Catch multiple values separated by spaces
+                temp = pair[p].split(' ')
+                if '' in temp:
+                    temp.remove('')
+                if len(temp) > 1:
+                    raise ValueError('Single Linear Regression format is two values per line, separated by comma')
             if len(pair) != 2:
-                raise ValueError("Input format is two values per line, separated by comma")
+                raise ValueError("Single Linear Regression format is two values per line, separated by comma")
             x_positions.append(float(pair[0]))
             y_positions.append(float(pair[1]))
 
@@ -210,17 +264,27 @@ def compute_y_linear_regression(textbox_content):
         # Split lines and remove unnecessary escape characters
         input_list = textbox_content.replace(' ', '').split(',')
 
+        # Check for non-numeric characters
+        for i in range(len(input_list)):
+            input_list[i] = input_list[i].strip()
+            if not re.search(r'[0-9,.]+', input_list[i]):
+                raise ValueError('Characters Unallowed, Sample Standard Deviation format one value per line')
+
         # Remove empty lines
         while '' in input_list:
             input_list.remove('')
 
+        # Convert strings to doubles
+        for i in range(len(input_list)):
+            # Catch multiple values separated by spaces
+            temp = input_list[i].split(' ')
+            if len(temp) > 1:
+                raise ValueError('Y-Regression format is \"x, m, b\" on one line separated by commas')
+            input_list[i] = float(input_list[i])
+
         # Error if the input is not 3 values
         if len(input_list) != 3:
             raise ValueError("Y-Regression format is \"x, m, b\" on one line separated by commas")
-
-        # Convert strings to doubles
-        for i in range(len(input_list)):
-            input_list[i] = float(input_list[i])
 
         y = (input_list[0] * input_list[1]) + input_list[2]
 
