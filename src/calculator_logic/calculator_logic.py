@@ -1,24 +1,28 @@
 import math
-
+import re
 from .calculation_result import CalculationResult
-
 
 def compute_sample_standard_deviation(textbox_content):
     # preq-LOGIC-3
     try:
+        if ' ' in textbox_content:
+            textbox_content = re.sub(' ', '', textbox_content)
+
         input_list = textbox_content.replace('\r', '').split('\n')
-        #check size, split on commas and spaces, remove blank and compare size. if change error out, if no change continue
+
         while '' in input_list:
             input_list.remove('')
 
         for row in input_list:
+            if re.search('[0-9]*', row):
+                raise ValueError('Non-numeric value entered')
             if ',' in row:
-                raise ValueError('Entries must be separated by new lines')
+                raise ValueError('Sample Standard Deviation format one value per line')
 
         if len(input_list) == 0:
-            raise ValueError("List Is Empty")
+            raise ValueError('Empty List, Sample Standard Deviation format one value per line')
         elif len(input_list) == 1:
-            return CalculationResult(0.0, True, "Sample Standard Deviation", "")
+            raise ValueError('Division by Zero, Sample Standard Deviation format one value per line')
 
         for i in range(len(input_list)):
             input_list[i] = float(input_list[i])
@@ -41,18 +45,23 @@ def compute_sample_standard_deviation(textbox_content):
 def compute_population_standard_deviation(textbox_content):
     # preq-LOGIC-4
     try:
+        if ' ' in textbox_content:
+            textbox_content = re.sub(' ', '', textbox_content)
+
         input_list = textbox_content.replace('\r', '').split('\n')
         while '' in input_list:
             input_list.remove('')
 
         for row in input_list:
+            if re.search('[0-9]*', row):
+                raise ValueError('Non-numeric value entered')
             if ',' in row:
-                raise ValueError('Entries must be separated by new lines')
+                raise ValueError('Population Standard Deviation format one value per line')
 
         if len(input_list) == 0:
-            raise ValueError("List Is Empty")
+            raise ValueError("Empty List, Population Standard Deviation format one value per line")
         elif len(input_list) == 1:
-            raise ValueError("At least two values required")
+            return CalculationResult(0.0, True, "Population Standard Deviation", "")
 
         for i in range(len(input_list)):
             input_list[i] = float(input_list[i])
@@ -62,7 +71,7 @@ def compute_population_standard_deviation(textbox_content):
         for x in input_list:
             diff_squares = (x - mean) ** 2
             sum_diff_squares += diff_squares
-        stddev = math.sqrt(sum_diff_squares / len(input_list) + 1)
+        stddev = math.sqrt(sum_diff_squares / len(input_list))
         return CalculationResult(stddev, True, "Population Standard Deviation", "")
     except ValueError as e:
         return CalculationResult(0.0, False, "", e)
@@ -71,6 +80,7 @@ def compute_population_standard_deviation(textbox_content):
 def compute_mean(textbox_content):
     # preq-LOGIC-5
     try:
+
         input_list = textbox_content.replace('\r', '').split('\n')
         while '' in input_list:
             input_list.remove('')
@@ -88,21 +98,38 @@ def compute_mean(textbox_content):
         mean = sum(input_list) / len(input_list)
         return CalculationResult(mean, True, "Mean", "")
     except ValueError as e:
-        return CalculationResult(0.0, False, "", e)
+        return CalculationResult(0.0, False, "", "Mean format one value per line")
 
 
 def compute_z_score(textbox_content):
     # preq-LOGIC-6
     try:
-        input_list = textbox_content.replace(' ', '').split(',')
+        if ' ' in textbox_content:
+            textbox_content = re.sub(' ', '', textbox_content)
+
+        input_list = textbox_content.replace(' ', '').split('\n')
         while '' in input_list:
             input_list.remove('')
 
+        if len(input_list) != 1:
+            raise ValueError("Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
+
+        input_list = input_list[0].split(',')
+        while '' in input_list:
+            input_list.remove('')
+
+        for row in input_list:
+            if re.search('[0-9]*', row):
+                raise ValueError('Non-numeric value entered')
+
         if len(input_list) != 3:
-            raise ValueError("Exactly Three Values Required")
+            raise ValueError("Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
 
         for i in range(len(input_list)):
             input_list[i] = float(input_list[i])
+
+        if input_list[2] == 0:
+            raise ValueError("Division by Zero")
 
         z = (input_list[0] - input_list[1]) / input_list[2]
         return CalculationResult(z, True, "Z-Score", "")
@@ -118,6 +145,9 @@ def compute_single_linear_regression(textbox_content):
     # x_bar = Sum(x)/n
     # y_bar = Sum(y)/n
     try:
+        if ' ' in textbox_content:
+            textbox_content = re.sub(' ', '', textbox_content)
+
         input_pairs = textbox_content.replace('\r', '').split('\n')
 
         while '' in input_pairs:
@@ -131,8 +161,11 @@ def compute_single_linear_regression(textbox_content):
 
         for pairs in input_pairs:
             pair = pairs.split(',')
+            for row in pair:
+                if re.search('[0-9]*', row):
+                    raise ValueError('Non-numeric value entered')
             if len(pair) != 2:
-                raise ValueError("Two values per line, separated by comma")
+                raise ValueError("Input format is two values per line, separated by comma")
             x_positions.append(float(pair[0]))
             y_positions.append(float(pair[1]))
 
@@ -161,9 +194,16 @@ def compute_single_linear_regression(textbox_content):
 def compute_y_linear_regression(textbox_content):
     # preq-LOGIC-8
     try:
+        if ' ' in textbox_content:
+            textbox_content = re.sub(' ', '', textbox_content)
+
         input_list = textbox_content.replace(' ', '').split(',')
         while '' in input_list:
             input_list.remove('')
+
+        for row in input_list:
+            if re.search('[0-9]*', row):
+                raise ValueError('Non-numeric value entered')
 
         if len(input_list) != 3:
             raise ValueError("Exactly Three Values Required")
