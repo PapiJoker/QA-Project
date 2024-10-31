@@ -340,7 +340,7 @@ def test_PredictY_EmptyList_ReturnsError():
     #preq-UNIT-TEST-7
     #Arrange
     input_data = ""
-    expected = "Missing Value(s), Y-Prediction format is \"x, m, b\" on one line separated by commas"
+    expected = "Empty List, Y-Prediction format is \"x, m, b\" on one line separated by commas"
 
     #Act
     result = compute_predict_y(input_data)
