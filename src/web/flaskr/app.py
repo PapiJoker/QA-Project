@@ -67,7 +67,7 @@ def single_linear_regression():
 @app.route('/y_from_linear_regression', methods=['GET', 'POST'])
 def y_from_linear_regression():
     textbox_content = request.form.get('textbox_content')
-    calculation = logic.compute_y_linear_regression(textbox_content)
+    calculation = logic.compute_predict_y(textbox_content)
     if calculation.is_successful:
         return render_template('index.html', calculation_result=calculation.result, operation=calculation.operation,
                                textbox_content=textbox_content)

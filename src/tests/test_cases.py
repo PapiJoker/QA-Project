@@ -129,6 +129,42 @@ def test_PopulationStandardDeviation_CommaInList_ReturnsError():
     #Assert
     assert expected == str(result.error)
 #----------------------------------------------------Mean--------------------------------------------------------------
+def test_Mean_ValidList_ReturnsMean():
+    #preq-UNIT-TEST-4
+    #Arrange
+    input_data = "9\n6\n8\n5\n7"
+    expected = 7.0
+
+    #Act
+    result = compute_mean(input_data)
+
+    #Assert
+    assert expected == result.result
+
+def test_Mean_EmptyList_ReturnsError():
+    #preq-UNIT-TEST-4
+    #Arrange
+    input_data = ""
+    expected = "Empty List, Mean format one value per line"
+
+    #Act
+    result = compute_mean(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_Mean_CommaInList_ReturnsError():
+    #preq-UNIT-TEST-4
+    #Arrange
+    input_data = "5,\n10\n20"
+    expected = "Non-Value found, Mean format one value per line"
+
+    #Act
+    result = compute_mean(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
 
 #----------------------------------------------------Z-Score-----------------------------------------------------------
 def test_ZScore_ThreeValues_ReturnsZScore():
@@ -251,4 +287,63 @@ def test_SingleLinearRegression_AllZeros_ReturnsError():
     #Assert
     assert expected == str(result.error)
 
+def test_SingleLinearRegression_MissingValue_ReturnsError():
+    #preq-UNIT-TEST-6
+    #Arrange
+    input_data = "0,1\n10,0\n20,"
+    expected = "Missing x or y value, Single Linear Regression format is one x,y pair per line separated by commas"
+
+    #Act
+    result = compute_single_linear_regression(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_SingleLinearRegression_OnePair_ReturnsError():
+    #preq-UNIT-TEST-6
+    #Arrange
+    input_data = "0,1"
+    expected = "More than 1 x,y pair needed, Single Linear Regression format is one x,y pair per line separated by commas"
+
+    #Act
+    result = compute_single_linear_regression(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
 #----------------------------------------------------Predict Y from mx+b-----------------------------------------------
+def test_PredictY_ValidList_ReturnsYPrediction():
+    #preq-UNIT-TEST-7
+    #Arrange
+    input_data = "1.535,61.272186542107434,-39.06195591838656"
+    expected = "y = 54.99085042374834"
+
+    #Act
+    result = compute_predict_y(input_data)
+
+    #Assert
+    assert expected == result.result
+
+def test_PredictY_MissingValue_ReturnsError():
+    #preq-UNIT-TEST-7
+    #Arrange
+    input_data = "1.535,61.272186542107434"
+    expected = "Missing Value(s), Y-Prediction format is \"x, m, b\" on one line separated by commas"
+
+    #Act
+    result = compute_predict_y(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_PredictY_EmptyList_ReturnsError():
+    #preq-UNIT-TEST-7
+    #Arrange
+    input_data = ""
+    expected = "Missing Value(s), Y-Prediction format is \"x, m, b\" on one line separated by commas"
+
+    #Act
+    result = compute_predict_y(input_data)
+
+    #Assert
+    assert expected == str(result.error)

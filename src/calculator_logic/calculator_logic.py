@@ -99,11 +99,11 @@ def compute_mean(textbox_content):
         # Error out if values are separated by commas
         for row in input_list:
             if ',' in row:
-                raise ValueError('Entries must be separated by new lines')
+                raise ValueError('Non-Value found, Mean format one value per line')
 
         # Error if the input is empty
         if len(input_list) == 0:
-            raise ValueError("Empty List")
+            raise ValueError("Empty List, Mean format one value per line")
 
         # Convert strings to doubles
         for i in range(len(input_list)):
@@ -114,7 +114,7 @@ def compute_mean(textbox_content):
 
     # Catch errors and show the error page
     except ValueError as e:
-        return CalculationResult(0.0, False, "", "Mean format one value per line")
+        return CalculationResult(0.0, False, "", e)
 
 
 def compute_z_score(textbox_content):
@@ -178,8 +178,10 @@ def compute_single_linear_regression(textbox_content):
         # Convert strings to doubles and separate pairs
         for pairs in input_pairs:
             pair = pairs.split(',')
+            while '' in pair:
+                pair.remove('')
             if len(pair) != 2:
-                raise ValueError("Single Linear Regression format is one x,y pair per line separated by commas")
+                raise ValueError("Missing x or y value, Single Linear Regression format is one x,y pair per line separated by commas")
             x_positions.append(float(pair[0]))
             y_positions.append(float(pair[1]))
 
@@ -213,7 +215,7 @@ def compute_single_linear_regression(textbox_content):
         return CalculationResult(0.0, False, "", e)
 
 
-def compute_y_linear_regression(textbox_content):
+def compute_predict_y(textbox_content):
     # preq-LOGIC-8
     try:
         # Split lines and remove unnecessary escape characters
@@ -225,7 +227,7 @@ def compute_y_linear_regression(textbox_content):
 
         # Error if the input is not 3 values
         if len(input_list) != 3:
-            raise ValueError("Y-Regression format is \"x, m, b\" on one line separated by commas")
+            raise ValueError("Missing Value(s), Y-Prediction format is \"x, m, b\" on one line separated by commas")
 
         # Convert strings to doubles
         for i in range(len(input_list)):
@@ -234,8 +236,8 @@ def compute_y_linear_regression(textbox_content):
         y = (input_list[0] * input_list[1]) + input_list[2]
 
         result = "y = " + str(y)
-        return CalculationResult(result, True, "Single Linear Regression Prediction", "")
+        return CalculationResult(result, True, "Y-Prediction", "")
 
     # Catch errors and show the error page
     except ValueError as e:
-        return CalculationResult(0.0, False, "", "Y-Regression format is \"x, m, b\" on one line separated by commas")
+        return CalculationResult(0.0, False, "", e)
