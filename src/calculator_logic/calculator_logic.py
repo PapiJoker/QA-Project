@@ -156,7 +156,7 @@ def compute_z_score(textbox_content):
     # preq-LOGIC-6
     try:
         # Split lines and remove unnecessary escape characters
-        input_list = textbox_content.replace(' ', '').split('\n')
+        input_list =textbox_content.split('\n')
 
 
         # Remove empty lines
@@ -167,15 +167,16 @@ def compute_z_score(textbox_content):
         if len(input_list) == 0:
             raise ValueError("Empty List, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
 
+        input_list = input_list[0].split(',')
+        while '' in input_list:
+            input_list.remove('')
+
         # Check for non-numeric characters
         for i in range(len(input_list)):
             input_list[i] = input_list[i].strip()
             if not re.search(r'[0-9,.]+', input_list[i]):
-                raise ValueError('Non-Value found, Z-Score format is \"value,mean,stdDev\" on one line separated by commas')
-
-        input_list = input_list[0].split(',')
-        while '' in input_list:
-            input_list.remove('')
+                raise ValueError(
+                    'Non-Value found, Z-Score format is \"value,mean,stdDev\" on one line separated by commas')
 
         if len(input_list) != 3:
             raise ValueError("Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
@@ -236,7 +237,7 @@ def compute_single_linear_regression(textbox_content):
                 if '' in temp:
                     temp.remove('')
                 if len(temp) > 1:
-                    raise ValueError('Single Linear Regression format is two values per line, separated by comma')
+                    raise ValueError('Single Linear Regression format is one x,y pair per line separated by commas')
             while '' in pair:
                 pair.remove('')
             if len(pair) != 2:

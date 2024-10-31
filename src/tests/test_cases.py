@@ -70,6 +70,30 @@ def test_SampleStandardDeviation_ValidList_ReturnsSampleStandDev():
 
     #Assert
     assert expected == result.result
+
+def test_SampleStandardDeviation_TwoValuesSameLineSpaced_ReturnsError():
+    #preq-UNIT-TEST-2
+    #Arrange
+    input_data = "10\n10 10\n100"
+    expected = "Sample Standard Deviation format one value per line"
+
+    #Act
+    result = compute_sample_standard_deviation(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_SampleStandardDeviation_CharInList_ReturnsError():
+    #preq-UNIT-TEST-2
+    #Arrange
+    input_data = "Ten\n10\n100"
+    expected = "Non-Value found, Sample Standard Deviation format one value per line"
+
+    #Act
+    result = compute_sample_standard_deviation(input_data)
+
+    #Assert
+    assert expected == str(result.error)
 #----------------------------------------------------Population Standard Deviation-------------------------------------
 def test_PopulationStandardDeviation_ValidList_ReturnsSampleStandDev():
     #preq-UNIT-TEST-3
@@ -128,6 +152,30 @@ def test_PopulationStandardDeviation_CommaInList_ReturnsError():
 
     #Assert
     assert expected == str(result.error)
+
+def test_PopulationStandardDeviation_TwoValuesSameLineSpaced_ReturnsError():
+    #preq-UNIT-TEST-3
+    #Arrange
+    input_data = "10\n10 10\n100"
+    expected = "Population Standard Deviation format one value per line"
+
+    #Act
+    result = compute_population_standard_deviation(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_PopulationStandardDeviation_CharInList_ReturnsError():
+    #preq-UNIT-TEST-3
+    #Arrange
+    input_data = "Ten\n10\n100"
+    expected = "Non-Value found, Population Standard Deviation format one value per line"
+
+    #Act
+    result = compute_population_standard_deviation(input_data)
+
+    #Assert
+    assert expected == str(result.error)
 #----------------------------------------------------Mean--------------------------------------------------------------
 def test_Mean_ValidList_ReturnsMean():
     #preq-UNIT-TEST-4
@@ -157,6 +205,30 @@ def test_Mean_CommaInList_ReturnsError():
     #preq-UNIT-TEST-4
     #Arrange
     input_data = "5,\n10\n20"
+    expected = "Non-Value found, Mean format one value per line"
+
+    #Act
+    result = compute_mean(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_Mean_TwoValuesSameLineSpaced_ReturnsError():
+    #preq-UNIT-TEST-4
+    #Arrange
+    input_data = "5 5\n10\n20"
+    expected = "Mean format one value per line"
+
+    #Act
+    result = compute_mean(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_Mean_CharInList_ReturnsError():
+    #preq-UNIT-TEST-4
+    #Arrange
+    input_data = "5\nNine\n20"
     expected = "Non-Value found, Mean format one value per line"
 
     #Act
@@ -219,6 +291,30 @@ def test_ZScore_EmptyList_ReturnsError():
     #Arrange
     input_data = ""
     expected = "Empty List, Z-Score format is \"value,mean,stdDev\" on one line separated by commas"
+
+    #Act
+    result = compute_z_score(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_ZScore_TooManyValuesSpace_ReturnsError():
+    #preq-UNIT-TEST-5
+    #Arrange
+    input_data = "2,3 3,5"
+    expected = "Z-Score format is \"value,mean,stdDev\" on one line separated by commas"
+
+    #Act
+    result = compute_z_score(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_ZScore_CharInList_ReturnsError():
+    #preq-UNIT-TEST-5
+    #Arrange
+    input_data = "2,three,5"
+    expected = "Non-Value found, Z-Score format is \"value,mean,stdDev\" on one line separated by commas"
 
     #Act
     result = compute_z_score(input_data)
@@ -311,6 +407,29 @@ def test_SingleLinearRegression_OnePair_ReturnsError():
     #Assert
     assert expected == str(result.error)
 
+def test_SingleLinearRegression_TooManyValueInPair_ReturnsError():
+    #preq-UNIT-TEST-6
+    #Arrange
+    input_data = "0,1,1 2,3"
+    expected = "Single Linear Regression format is one x,y pair per line separated by commas"
+
+    #Act
+    result = compute_single_linear_regression(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_SingleLinearRegression_CharInList_ReturnsError():
+    #preq-UNIT-TEST-6
+    #Arrange
+    input_data = "help me im scared"
+    expected = "Non-Value found, Single Linear Regression format is one x,y pair per line separated by commas"
+
+    #Act
+    result = compute_single_linear_regression(input_data)
+
+    #Assert
+    assert expected == str(result.error)
 #----------------------------------------------------Predict Y from mx+b-----------------------------------------------
 def test_PredictY_ValidList_ReturnsYPrediction():
     #preq-UNIT-TEST-7
@@ -341,6 +460,18 @@ def test_PredictY_EmptyList_ReturnsError():
     #Arrange
     input_data = ""
     expected = "Empty List, Y-Prediction format is \"x, m, b\" on one line separated by commas"
+
+    #Act
+    result = compute_predict_y(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_PredictY_CharinList_ReturnsError():
+    #preq-UNIT-TEST-7
+    #Arrange
+    input_data = "123,510,zero"
+    expected = "Non-Value found, Y-Prediction format is \"x, m, b\" on one line separated by commas"
 
     #Act
     result = compute_predict_y(input_data)
