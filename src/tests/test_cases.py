@@ -1,5 +1,7 @@
 import pytest
 from src.calculator_logic import *
+
+
 """
 MethodName_StateUnderTest_ExpectedBehavior
 
@@ -95,7 +97,7 @@ def test_SampleStandardDeviation_CharInList_ReturnsError():
     #Assert
     assert expected == str(result.error)
 #----------------------------------------------------Population Standard Deviation-------------------------------------
-def test_PopulationStandardDeviation_ValidList_ReturnsSampleStandDev():
+def test_PopulationStandardDeviation_ValidList_ReturnsPopulationStandDev():
     #preq-UNIT-TEST-3
     #Arrange
     input_data = "9\n6\n8\n5\n7"

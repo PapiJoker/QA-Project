@@ -5,3 +5,10 @@ First, clone this repository by running `git clone https://github.com/PapiJoker/
 Then, install the dependencies by running `pip install -r requirements.txt`.
 If you're missing python3 or pip, visit [here](https://packaging.python.org/en/latest/tutorials/installing-packages/).
 Finally, run the app with `python run.py`.
+
+### Running Tests
+#### End-To-End Tests
+Firstly, make sure you have one terminal open which is running the server locally on your machine.
+Then, open another terminal and run `python -m pytest .\src\e2e\test_cases.py`
+
+#### Unit Tests
