@@ -10,4 +10,5 @@ Finally, run the app with `python run.py`.
 ### Running Tests
 Have one terminal open which is running the server locally on your machine (follow the above commands).
 Then, open another terminal and run `python -m pytest`.
-This command will run all the tests found by `pytest`; both end-to-end and unit tests.
+This command will run all the tests found by pytest; both end-to-end and unit tests.
+If this does not work, run `python -m playwright install-deps`
