@@ -47,7 +47,9 @@ src\tests\test_cases.py .......................................                 
 
 ## Reviewing Unit Test Coverage
 100% coverage is achieved with the Unit Tests for 'calculator_logic'
-<img src="images/coverage.png" style="zoom: 50%;" />
+<p align = "center">
+ <img src="coverage-QA.jpg"/>
+</p>
 
 ## Executing End-To-End Tests
 Describe the detailed steps to build and execute all of your end-to-end unit tests *from the command line (terminal / console)*.
