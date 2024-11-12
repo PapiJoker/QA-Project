@@ -15,8 +15,7 @@ Short 2-3 sentence description of what the repository contains
 Josh Early and Ian McCracken
 
 ### Architecture
-Briefly describe the architecture of your project. Make diagram an image
-
+![QA_Architecture_Diagram.svg](assets%2FQA_Architecture_Diagram.svg)
 ### Environment
 This is a cross-platform application and should work in Windows 10+, Mac OSx Ventura+, and Linux environments. Note that the application has only been carefully tested in Windows 10.
 
@@ -48,7 +47,7 @@ src\tests\test_cases.py .......................................                 
 ## Reviewing Unit Test Coverage
 100% coverage is achieved with the Unit Tests for 'calculator_logic'
 <p align = "center">
- <img src="coverage-QA.jpg"/>
+ <img src="assets/coverage-QA.jpg"/>
 </p>
 
 ## Executing End-To-End Tests
