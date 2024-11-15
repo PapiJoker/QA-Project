@@ -1,5 +1,7 @@
 import math
 import re
+from multiprocessing.managers import Value
+
 from .calculation_result import CalculationResult
 
 
@@ -8,7 +10,6 @@ def compute_sample_standard_deviation(textbox_content):
     try:
         # Split lines and remove unnecessary escape characters
         input_list = textbox_content.replace('\r', '').split('\n')
-
 
         # if the list contains a non-numeric value, raise ValueError("Sample Standard Deviation format one value per line")
 
@@ -115,8 +116,6 @@ def compute_mean(textbox_content):
         # Split lines and remove unnecessary escape characters
         input_list = textbox_content.replace('\r', '').split('\n')
 
-
-
         # Remove empty lines
         while '' in input_list:
             input_list.remove('')
@@ -156,8 +155,7 @@ def compute_z_score(textbox_content):
     # preq-LOGIC-6
     try:
         # Split lines and remove unnecessary escape characters
-        input_list =textbox_content.split('\n')
-
+        input_list = textbox_content.split('\n')
 
         # Remove empty lines
         while '' in input_list:
@@ -166,7 +164,10 @@ def compute_z_score(textbox_content):
         # Error if the input is empty
         if len(input_list) == 0:
             raise ValueError("Empty List, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
+        elif len(input_list) > 1:
+            raise ValueError("Multiline Input, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
 
+        # Split lines and remove unnecessary escape characters
         input_list = input_list[0].split(',')
         while '' in input_list:
             input_list.remove('')
@@ -190,7 +191,8 @@ def compute_z_score(textbox_content):
             input_list[i] = float(input_list[i])
 
         if input_list[2] == 0:
-            raise ValueError("Division by Zero, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
+            raise ValueError(
+                "Division by Zero, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
 
         z = (input_list[0] - input_list[1]) / input_list[2]
         return CalculationResult(z, True, "Z-Score", "")
@@ -223,7 +225,8 @@ def compute_single_linear_regression(textbox_content):
         for i in range(len(input_pairs)):
             input_pairs[i] = input_pairs[i].strip()
             if not re.search(r'[0-9,.]+', input_pairs[i]):
-                raise ValueError('Non-Value found, Single Linear Regression format is one x,y pair per line separated by commas')
+                raise ValueError(
+                    'Non-Value found, Single Linear Regression format is one x,y pair per line separated by commas')
 
         x_positions = []
         y_positions = []
@@ -241,19 +244,22 @@ def compute_single_linear_regression(textbox_content):
             while '' in pair:
                 pair.remove('')
             if len(pair) != 2:
-                raise ValueError("Missing x or y value, Single Linear Regression format is one x,y pair per line separated by commas")
+                raise ValueError(
+                    "Missing x or y value, Single Linear Regression format is one x,y pair per line separated by commas")
             x_positions.append(float(pair[0]))
             y_positions.append(float(pair[1]))
 
         if len(input_pairs) == 1:
-            raise ValueError("More than 1 x,y pair needed, Single Linear Regression format is one x,y pair per line separated by commas")
+            raise ValueError(
+                "More than 1 x,y pair needed, Single Linear Regression format is one x,y pair per line separated by commas")
 
         if all(i == x_positions[0] for i in x_positions):
-            raise ValueError("All Xs are same value, Single Linear Regression format is one x,y pair per line separated by commas")
+            raise ValueError(
+                "All Xs are same value, Single Linear Regression format is one x,y pair per line separated by commas")
 
         if all(i == y_positions[0] for i in y_positions):
-            raise ValueError("All Ys are same value, Single Linear Regression format is one x,y pair per line separated by commas")
-
+            raise ValueError(
+                "All Ys are same value, Single Linear Regression format is one x,y pair per line separated by commas")
 
         x_bar = sum(x_positions) / len(x_positions)
         y_bar = sum(y_positions) / len(y_positions)
@@ -279,14 +285,20 @@ def compute_predict_y(textbox_content):
     # preq-LOGIC-8
     try:
         # Split lines and remove unnecessary escape characters
-        input_list = textbox_content.replace(' ', '').split(',')
+        input_list = textbox_content.split('\n')
 
         # Remove empty lines
         while '' in input_list:
             input_list.remove('')
 
+        # Error if the input is empty
         if len(input_list) == 0:
             raise ValueError("Empty List, Y-Prediction format is \"x, m, b\" on one line separated by commas")
+        elif len(input_list) > 1:
+            raise ValueError("Multiline Input, Y-Prediction format is \"x, m, b\" on one line separated by commas")
+
+        # Split lines and remove unnecessary escape characters
+        input_list = input_list[0].split(',')
 
         # Check for non-numeric characters
         for i in range(len(input_list)):
@@ -301,6 +313,10 @@ def compute_predict_y(textbox_content):
 
         # Convert strings to doubles
         for i in range(len(input_list)):
+            # Catch multiple values separated by spaces
+            temp = input_list[i].split(' ')
+            if len(temp) > 1:
+                raise ValueError('Y-Prediction format is \"x, m, b\" on one line separated by commas')
             input_list[i] = float(input_list[i])
 
         y = (input_list[0] * input_list[1]) + input_list[2]

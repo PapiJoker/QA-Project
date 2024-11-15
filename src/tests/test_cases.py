@@ -323,6 +323,18 @@ def test_ZScore_CharInList_ReturnsError():
 
     #Assert
     assert expected == str(result.error)
+
+def test_ZScore_MultilineInput_ReturnsError():
+    #preq-UNIT-TEST-5
+    #Arrange
+    input_data = '1,2,3\n1'
+    expected = 'Multiline Input, Z-Score format is \"value,mean,stdDev\" on one line separated by commas'
+
+    #Act
+    result = compute_z_score(input_data)
+
+    #Assert
+    assert expected == str(result.error)
 #----------------------------------------------------Simple Linear Regression------------------------------------------
 def test_SingleLinearRegression_ValidList_ReturnsSLR():
     #preq-UNIT-TEST-6
@@ -474,6 +486,30 @@ def test_PredictY_CharinList_ReturnsError():
     #Arrange
     input_data = "123,510,zero"
     expected = "Non-Value found, Y-Prediction format is \"x, m, b\" on one line separated by commas"
+
+    #Act
+    result = compute_predict_y(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_PredictY_MultipleValuesWithinCommas_ReturnsError():
+    #preq-UNIT-TEST-7
+    #Arrange
+    input_data = '1,2 2,3'
+    expected = 'Y-Prediction format is \"x, m, b\" on one line separated by commas'
+
+    #Act
+    result = compute_predict_y(input_data)
+
+    #Assert
+    assert expected == str(result.error)
+
+def test_PredictY_MultilineInput_ReturnsError():
+    #preq-UNIT-TEST-5
+    #Arrange
+    input_data = '1,2,3\n1'
+    expected = 'Multiline Input, Y-Prediction format is \"x, m, b\" on one line separated by commas'
 
     #Act
     result = compute_predict_y(input_data)
