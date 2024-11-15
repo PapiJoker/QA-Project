@@ -20,17 +20,21 @@ Josh Early and Ian McCracken
 This is a cross-platform application and should work in Windows 10+, Mac OSx Ventura+, and Linux environments. Note that the application has only been carefully tested in Windows 10.
 
 To prepare your environment to execute this application:
- 1. [Install the latest Java runtime for your system.](https://www.java.com/en/download/manual.jsp)
- 2. ...
+ 1. 
+ 2. 
 
 To configure Playwright for end-to-end testing:
-  1. ...
+  1. 
 
 ## Executing the Web Application
-Describe the detailed steps to build and execute your web application *from the command line (terminal / console)*. Your user may not have an IDE installed. 
+
+
+
 
 ## Executing Unit Tests
-Describe the detailed steps to build and execute all of your unit tests *from the command line (terminal / console)*. Your user may not have an IDE installed.
+
+
+
 ```bash
 > pytest .\src\tests\
 ================================================= test session starts =================================================
@@ -47,7 +51,7 @@ src\tests\test_cases.py .......................................                 
 ## Reviewing Unit Test Coverage
 100% coverage is achieved with the Unit Tests for 'calculator_logic'
 <p align = "center">
- <img src="assets/coverage-QA.jpg"/>
+ <img src="documentation/coverage-QA.jpg"/>
 </p>
 
 ## Executing End-To-End Tests
