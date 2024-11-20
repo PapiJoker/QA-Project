@@ -40,6 +40,7 @@ If you're missing `pip`, try `python -m pip install -r requirements.txt`.
 Visit [here](https://packaging.python.org/en/latest/tutorials/installing-packages/) if you're still having trouble.
 Finally, run the app with `python run.py`.
 ADD PHOTOS FOR RUNNING TURN INTO STEPS
+ADD A FINAL LINE ON HOT TO CONNECT
 ### Executing Unit Tests
 With the webserver running, you can continue with testing.
 Open another terminal in order to keep the webserver running.
