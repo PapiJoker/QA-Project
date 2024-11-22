@@ -41,7 +41,7 @@ Steps to get the project running:
    - If you're missing `pip`, try `python -m pip install -r requirements.txt`.
    - Visit [here](https://packaging.python.org/en/latest/tutorials/installing-packages/) if you're still having trouble.
 4. Run the app with `python run.py`.
-5. 6. After the application starts, launch a browser and connect to http://127.0.0.1:5000/ <br/> <br/>
+5. After the application starts, launch a browser and connect to http://127.0.0.1:5000/ <br/> <br/>
 You should see something like this if everything is working.
 ```bash
 > python run.py
