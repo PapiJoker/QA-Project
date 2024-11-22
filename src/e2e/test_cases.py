@@ -17,7 +17,7 @@ def test_CalculatorWebUi_SampleStandardDeviationValidFormat_ReturnsCorrect(page:
 
     page.click('#button_sample_standard_deviation')
 
-    expect(page.locator('#calculation_result')).to_contain_text('3.060787652326')
+    expect(page.locator('#calculation_result')).to_contain_text('3.0607876523')
 
 def test_CalculatorWebUi_PopulationStandardDeviationEmptyList_ReturnsError(page: Page):
     # preq-E2E-TEST-7
@@ -66,7 +66,7 @@ def test_CalculatorWebUi_ZScoreValidFormat_ReturnsCorrect(page: Page):
     page.click('#button_z_score')
 
     # Rounding Error
-    expect(page.locator('#calculation_result')).to_contain_text('-0.49006993309715474')#given -0.49007 in e2e requirements
+    expect(page.locator('#calculation_result')).to_contain_text('-0.4900699331')#given -0.49007 in e2e requirements
 
 def test_CalculatorWebUi_SingleLinearRegressionValidFormat_ReturnsCorrect(page: Page):
     # preq-E2E-TEST-11
@@ -79,7 +79,7 @@ def test_CalculatorWebUi_SingleLinearRegressionValidFormat_ReturnsCorrect(page: 
     page.click('#button_single_linear_regression')
 
     # Rounding Error
-    expect(page.locator('#calculation_result')).to_contain_text('y = -0.045961532930936376x + 6.933587781374593 ') #given y = -0.04596x + 6.9336 in e2e requirements
+    expect(page.locator('#calculation_result')).to_contain_text('y = -0.0459615329x + 6.9335877814 ') #given y = -0.04596x + 6.9336 in e2e requirements
 
 def test_CalculatorWebUi_YPredictValidFormat_ReturnsCorrect(page: Page):
     # preq-E2E-TEST-12

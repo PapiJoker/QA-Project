@@ -65,7 +65,7 @@ def test_SampleStandardDeviation_ValidList_ReturnsSampleStandDev():
     #preq-UNIT-TEST-2
     #Arrange
     input_data = "9\n6\n8\n5\n7"
-    expected = 1.5811388300841898
+    expected = 1.5811388301
 
     #Act
     result = compute_sample_standard_deviation(input_data)
@@ -101,7 +101,7 @@ def test_PopulationStandardDeviation_ValidList_ReturnsPopulationStandDev():
     #preq-UNIT-TEST-3
     #Arrange
     input_data = "9\n6\n8\n5\n7"
-    expected = 1.4142135623730951
+    expected = 1.4142135624
 
     #Act
     result = compute_population_standard_deviation(input_data)
@@ -245,7 +245,7 @@ def test_ZScore_ThreeValues_ReturnsZScore():
     #preq-UNIT-TEST-5
     #Arrange
     input_data = "11.5,7,1.5811388300841898"
-    expected = 2.846049894151541
+    expected = 2.8460498942
 
     #Act
     result = compute_z_score(input_data)
@@ -341,7 +341,7 @@ def test_SingleLinearRegression_ValidList_ReturnsSLR():
     #Arrange
     input_data = ("1.47,52.21\n1.5,53.12\n1.52,54.48\n 1.55,55.84\n1.57,57.2\n 1.6,58.57\n 1.63,59.93\n 1.65,61.29"+
                   "\n1.68,63.11\n1.7,64.47\n1.73,66.28\n1.75,68.1\n1.78,69.92\n1.8,72.19\n1.83,74.46")
-    expected = "y = 61.272186542110624x + -39.06195591884392"
+    expected = "y = 61.2721865421x + -39.0619559188"
 
     #Act
     result = compute_single_linear_regression(input_data)
@@ -449,7 +449,7 @@ def test_PredictY_ValidList_ReturnsYPrediction():
     #preq-UNIT-TEST-7
     #Arrange
     input_data = "1.535,61.272186542107434,-39.06195591838656"
-    expected = "y = 54.99085042374834"
+    expected = "y = 54.9908504237"
 
     #Act
     result = compute_predict_y(input_data)

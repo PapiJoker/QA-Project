@@ -54,7 +54,7 @@ def compute_sample_standard_deviation(textbox_content):
 
         stddev = math.sqrt(sum_diff_squares / (len(input_list) - 1))
 
-        return CalculationResult(stddev, True, "Sample Standard Deviation", "")
+        return CalculationResult(round(stddev,10), True, "Sample Standard Deviation", "")
 
     # Catch errors and show the error page
     except ValueError as e:
@@ -103,7 +103,7 @@ def compute_population_standard_deviation(textbox_content):
             diff_squares = (x - mean) ** 2
             sum_diff_squares += diff_squares
         stddev = math.sqrt(sum_diff_squares / len(input_list))
-        return CalculationResult(stddev, True, "Population Standard Deviation", "")
+        return CalculationResult(round(stddev,10), True, "Population Standard Deviation", "")
 
     # Catch errors and show the error page
     except ValueError as e:
@@ -144,7 +144,7 @@ def compute_mean(textbox_content):
             input_list[i] = float(input_list[i])
 
         mean = sum(input_list) / len(input_list)
-        return CalculationResult(mean, True, "Mean", "")
+        return CalculationResult(round(mean,10), True, "Mean", "")
 
     # Catch errors and show the error page
     except ValueError as e:
@@ -195,7 +195,7 @@ def compute_z_score(textbox_content):
                 "Division by Zero, Z-Score format is \"value,mean,stdDev\" on one line separated by commas")
 
         z = (input_list[0] - input_list[1]) / input_list[2]
-        return CalculationResult(z, True, "Z-Score", "")
+        return CalculationResult(round(z,10), True, "Z-Score", "")
 
     # Catch errors and show the error page
     except ValueError as e:
@@ -273,7 +273,7 @@ def compute_single_linear_regression(textbox_content):
 
         b = y_bar - m * x_bar
 
-        result = f'y = {m}x + {b}'
+        result = f'y = {round(m,10)}x + {round(b,10)}'
         return CalculationResult(result, True, "Single Linear Regression Formula:", "")
 
     # Catch errors and show the error page
@@ -321,7 +321,7 @@ def compute_predict_y(textbox_content):
 
         y = (input_list[0] * input_list[1]) + input_list[2]
 
-        result = "y = " + str(y)
+        result = "y = " + str(round(y,10))
         return CalculationResult(result, True, "Single Linear Regression Prediction", "")
 
     # Catch errors and show the error page
