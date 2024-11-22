@@ -34,13 +34,23 @@ This is a cross-platform application and should work in Windows 10+, Mac OSx Ven
 Note that the application has only been carefully tested in Windows 10.
 
 ### Executing the Web Application
-First, clone this repository by running `git clone https://github.com/PapiJoker/QA-Project.git` in the folder where you want the project located.
-Then, install the dependencies by running `pip install -r requirements.txt`.
-If you're missing `pip`, try `python -m pip install -r requirements.txt`.
-Visit [here](https://packaging.python.org/en/latest/tutorials/installing-packages/) if you're still having trouble.
-Finally, run the app with `python run.py`.
-ADD PHOTOS FOR RUNNING TURN INTO STEPS
-ADD A FINAL LINE ON HOT TO CONNECT
+Steps to get the project running:
+1. Clone this repository by running `git clone https://github.com/PapiJoker/QA-Project.git` in the folder where you want the project located.
+2. Open the project folder by running `cd QA-Project`.
+3. Install the dependencies by running `pip install -r requirements.txt`.
+   - If you're missing `pip`, try `python -m pip install -r requirements.txt`.
+   - Visit [here](https://packaging.python.org/en/latest/tutorials/installing-packages/) if you're still having trouble.
+4. Run the app with `python run.py`.
+5. 6. After the application starts, launch a browser and connect to http://127.0.0.1:5000/ <br/> <br/>
+You should see something like this if everything is working.
+```bash
+> python run.py
+ * Serving Flask app 'src.web.flaskr.app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+```
 ### Executing Unit Tests
 With the webserver running, you can continue with testing.
 Open another terminal in order to keep the webserver running.
