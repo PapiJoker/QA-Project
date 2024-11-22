@@ -57,16 +57,16 @@ Open another terminal in order to keep the webserver running.
 Execute the unit tests with `python -m pytest ./src/tests/` from your top-level folder.
 
 ```bash
-> pytest .\src\tests\
+> python -m pytest ./src/tests/
 ================================================= test session starts =================================================
 platform win32 -- Python 3.12.2, pytest-8.3.3, pluggy-1.5.0
-rootdir: C:\Users\Josh\Documents\GitHub\QA-Project
+rootdir: C:\Users\Josh\Desktop\QA-Project
 plugins: base-url-2.1.0, playwright-0.5.2
-collected 39 items
+collected 42 items
 
-src\tests\test_cases.py .......................................                                                  [100%]
+src\tests\test_cases.py ..........................................                                               [100%]
 
-================================================= 39 passed in 0.10s ==================================================
+================================================= 42 passed in 0.13s ==================================================
 ```
 
 ### Reviewing Unit Test Coverage
@@ -80,17 +80,17 @@ Open another terminal and run `python -m playwright install-deps`.
 Then, with the webserver running, run `python -m pytest ./src/e2e/`.
 
 ```bash
-> pytest .\src\e2e\
+> python -m pytest ./src/e2e/
 ================================================= test session starts =================================================
 platform win32 -- Python 3.12.2, pytest-8.3.3, pluggy-1.5.0
-rootdir: C:\Users\Josh\Documents\GitHub\QA-Project
+rootdir: C:\Users\Josh\Desktop\QA-Project
 plugins: base-url-2.1.0, playwright-0.5.2
 collected 8 items
 
 src\e2e\test_cases.py ........                                                                                   [100%]
 
-================================================== 8 passed in 7.90s ==================================================
+================================================== 8 passed in 4.51s ==================================================
 ```
 
 ### Final Video Presentation
-// Link to our final video presentation
+[Please view our final project presentation video here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
