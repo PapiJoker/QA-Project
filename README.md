@@ -93,4 +93,4 @@ src\e2e\test_cases.py ........                                                  
 ```
 
 ### Final Video Presentation
-[Please view our final project presentation video here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+[Please view our final project presentation video here](https://youtu.be/kCGE9aWoZB8)
